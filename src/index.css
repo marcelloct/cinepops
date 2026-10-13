@@ -340,6 +340,118 @@
   }
 }
 
+/* ---------- Barra superior da Home ---------- */
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ---------- Botões extras ---------- */
+.btn-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  font-size: 1.2rem;
+}
+.btn-icon[aria-pressed='true'] {
+  background: #d9d2ec;
+}
+
+.btn-danger {
+  color: #fff;
+  background: var(--pink);
+}
+
+/* ---------- Modal ---------- */
+.dialog {
+  width: calc(100vw - 32px);
+  max-width: 420px;
+  padding: 0;
+  color: var(--ink);
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 22px;
+  box-shadow: 0 8px 0 var(--ink);
+}
+.dialog[open] {
+  animation: pop 0.4s cubic-bezier(0.2, 1.6, 0.4, 1);
+}
+.dialog::backdrop {
+  background: rgba(26, 6, 56, 0.72);
+  backdrop-filter: blur(3px);
+}
+.dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 26px 24px 22px;
+}
+.dialog-emoji {
+  font-size: 2.6rem;
+  line-height: 1;
+}
+.dialog h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.dialog p {
+  margin: 0;
+  font-weight: 500;
+}
+.dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
+/* ---------- Troféu ---------- */
+.theme-card {
+  position: relative;
+}
+
+.theme-card.has-trophy {
+  background: linear-gradient(135deg, var(--accent) 55%, #fff3a8);
+}
+
+.trophy {
+  position: absolute;
+  top: -16px;
+  right: -10px;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  font-size: 1.9rem;
+  background: linear-gradient(145deg, #ffe46b, #ffb300);
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  box-shadow: 0 4px 0 var(--ink);
+  transform: rotate(12deg);
+}
+.theme-card:hover .trophy {
+  animation: wiggle 0.6s ease-in-out;
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(12deg);
+  }
+  30% {
+    transform: rotate(-8deg) scale(1.12);
+  }
+  60% {
+    transform: rotate(18deg) scale(1.05);
+  }
+}
+
 /* Acessibilidade: respeita quem prefere menos movimento */
 @media (prefers-reduced-motion: reduce) {
   *,
