@@ -1,0 +1,38 @@
+:root {
+  --ink: #1a0638;
+  --accent: #ffd400;
+  --ok: #2ee59d;
+  --pink: #ff4d9d;
+  --violet: #6a2cf0;
+  --radius: 18px;
+  font-family: 'Fredoka', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: #fff;
+  background: radial-gradient(circle at 50% -10%, #7a3cff, #2a0a5e 65%) fixed;
+}
+
+/* Raios girando ao fundo */
+body::before {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  z-index: -1;
+  background: repeating-conic-gradient(
+    rgba(255, 255, 255, 0.06) 0 10deg,
+    transparent 10deg 20deg
+  );
+  animation: spin 80s linear infinite;
+  pointer-events: none;
+}
+
+a {
+  color: inherit;
+}

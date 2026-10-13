@@ -1,0 +1,353 @@
+.app {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px 16px 56px;
+}
+
+/* ---------- Header ---------- */
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  margin-bottom: 28px;
+}
+.header h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  text-shadow: 0 3px 0 var(--ink);
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.back {
+  font-weight: 600;
+  text-decoration: none;
+  opacity: 0.85;
+}
+.back:hover {
+  opacity: 1;
+}
+
+/* ---------- Botões ---------- */
+.btn {
+  display: inline-block;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--accent);
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  padding: 8px 18px;
+  box-shadow: 0 4px 0 var(--ink);
+  cursor: pointer;
+  transition:
+    transform 0.1s,
+    box-shadow 0.1s;
+}
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--ink);
+}
+.btn:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--ink);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn-ghost {
+  background: #fff;
+}
+
+/* ---------- Placar ---------- */
+.score {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 4px 16px;
+  color: var(--ink);
+  background: var(--accent);
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  box-shadow: 0 4px 0 var(--ink);
+  transform: rotate(-2deg);
+}
+.score-value {
+  display: inline-block;
+  font-size: 2rem;
+  font-weight: 700;
+}
+.score-value.bump {
+  animation: bump 0.45s cubic-bezier(0.2, 1.8, 0.4, 1);
+}
+.score-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* ---------- Vitória ---------- */
+.victory {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 14px 18px;
+  color: var(--ink);
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: var(--ok);
+  border: 3px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 0 5px 0 var(--ink);
+  animation: pop 0.6s cubic-bezier(0.2, 1.6, 0.4, 1);
+}
+.victory-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ---------- Grid e cards ---------- */
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  position: relative; /* âncora do confete */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px 10px 10px;
+  color: var(--ink);
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 0 5px 0 var(--ink);
+  transition:
+    transform 0.15s,
+    background 0.3s;
+}
+.card:focus-within {
+  transform: translateY(-3px);
+}
+
+.card-index {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: var(--accent);
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+}
+
+.play-btn {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  color: #fff;
+  font-size: 1rem;
+  background: var(--pink);
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  box-shadow: 0 3px 0 var(--ink);
+  cursor: pointer;
+  transition:
+    transform 0.1s,
+    box-shadow 0.1s;
+}
+.play-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--ink);
+}
+.play-btn.is-playing {
+  background: var(--violet);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.card-input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 1.05rem;
+  color: var(--ink);
+  background: #f4efff;
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  outline: none;
+}
+.card-input:focus {
+  background: #fff;
+  box-shadow: 0 0 0 4px var(--accent);
+}
+
+/* Estado resolvido */
+.card.is-solved {
+  background: var(--ok);
+}
+.card.is-solved .card-input {
+  font-weight: 700;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+.card.just-solved {
+  animation: pop 0.55s cubic-bezier(0.2, 1.6, 0.4, 1);
+}
+
+.card-check {
+  font-size: 1.5rem;
+  font-weight: 700;
+  animation: pop 0.5s cubic-bezier(0.2, 1.8, 0.4, 1);
+}
+
+/* ---------- Confete ---------- */
+.confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.confetti i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 14px;
+  background: var(--color);
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  animation: burst 0.9s ease-out forwards;
+}
+
+/* ---------- Home ---------- */
+.home-title {
+  margin: 12px 0 4px;
+  text-align: center;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  text-shadow: 0 4px 0 var(--ink);
+}
+.home-sub {
+  margin: 0 0 32px;
+  text-align: center;
+  opacity: 0.85;
+}
+
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+}
+.theme-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px;
+  color: var(--ink);
+  text-decoration: none;
+  background: var(--accent);
+  border: 3px solid var(--ink);
+  border-radius: 22px;
+  box-shadow: 0 7px 0 var(--ink);
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+}
+.theme-card:hover {
+  transform: translateY(-4px) rotate(-1deg);
+  box-shadow: 0 11px 0 var(--ink);
+}
+.theme-emoji {
+  font-size: 3rem;
+  line-height: 1;
+}
+.theme-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.theme-desc {
+  font-weight: 500;
+}
+.theme-progress {
+  align-self: flex-start;
+  margin-top: 6px;
+  padding: 2px 14px;
+  color: #fff;
+  font-weight: 600;
+  background: var(--ink);
+  border-radius: 999px;
+}
+
+/* ---------- Animações ---------- */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pulse {
+  50% {
+    transform: scale(1.1);
+  }
+}
+@keyframes bump {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.5) rotate(4deg);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes pop {
+  0% {
+    transform: scale(0.85);
+  }
+  60% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes burst {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--angle))
+      translateY(calc(var(--dist) * -1)) rotate(260deg);
+  }
+}
+
+/* Acessibilidade: respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before {
+    animation: none !important;
+    transition: none !important;
+  }
+  .confetti {
+    display: none;
+  }
+}
