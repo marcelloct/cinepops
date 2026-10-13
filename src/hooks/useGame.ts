@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { Challenge } from '../types/challenge';
-import { loadSolved, saveSolved } from '../utils/storage';
+import { awardTrophy, loadSolved, saveSolved } from '../utils/storage';
 
 export function useGame(themeId: string, challenges: Challenge[]) {
   const [solved, setSolved] = useState<Set<number>>(() => loadSolved(themeId));
@@ -27,13 +27,20 @@ export function useGame(themeId: string, challenges: Challenge[]) {
     [challenges, solved]
   );
 
+  const total = challenges.length;
+  const isComplete = total > 0 && score === total;
+
+  useEffect(() => {
+    if (isComplete) awardTrophy(themeId);
+  }, [isComplete, themeId]);
+
   return {
     solved,
     markSolved,
     reset,
     round,
     score,
-    total: challenges.length,
-    isComplete: score === challenges.length,
+    total,
+    isComplete,
   };
 }
