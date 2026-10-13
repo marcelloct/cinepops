@@ -1,8 +1,11 @@
+import { isMuted } from './settings';
+
 let ctx: AudioContext | null = null;
 
 const NOTES = [523.25, 659.25, 783.99, 1046.5]; // Dó, Mi, Sol, Dó (octave higher)
 
 export function playSuccess() {
+  if (isMuted()) return;
   try {
     ctx ??= new AudioContext();
     if (ctx.state === 'suspended') void ctx.resume();
