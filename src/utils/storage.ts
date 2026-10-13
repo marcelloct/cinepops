@@ -21,3 +21,21 @@ export function saveSolved(themeId: string, solved: Set<number>) {
     /* No persistency, but the game still working */
   }
 }
+
+const trophyKey = (themeId: string) => `movies:trophy:${themeId}`;
+
+export function hasTrophy(themeId: string): boolean {
+  try {
+    return localStorage.getItem(trophyKey(themeId)) === '1';
+  } catch {
+    return false;
+  }
+}
+
+export function awardTrophy(themeId: string) {
+  try {
+    localStorage.setItem(trophyKey(themeId), '1');
+  } catch {
+    /* No persistency */
+  }
+}
