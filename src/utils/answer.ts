@@ -1,3 +1,4 @@
+import type { Lang } from '../i18n/lang';
 import type { Challenge } from '../types/challenge';
 
 const LEADING_ARTICLES = /^(o|a|os|as|um|uma|the)\s+/;
@@ -20,7 +21,18 @@ export function isCorrectAnswer(input: string, challenge: Challenge): boolean {
   const typed = normalizeText(input);
   if (!typed) return false;
 
-  return [challenge.answer, ...(challenge.aliases ?? [])].some(
-    (candidate) => normalizeText(candidate) === typed
-  );
+  const candidates = [
+    challenge.answer,
+    challenge.answerEn,
+    ...(challenge.aliases ?? []),
+  ].filter((c): c is string => Boolean(c));
+
+  return candidates.some((candidate) => normalizeText(candidate) === typed);
+}
+
+/** Título que aparece no card depois do acerto, conforme o idioma da interface. */
+export function displayAnswer(challenge: Challenge, lang: Lang): string {
+  return lang === 'en'
+    ? (challenge.answerEn ?? challenge.answer)
+    : challenge.answer;
 }
