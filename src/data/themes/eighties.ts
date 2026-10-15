@@ -5,9 +5,12 @@ const a = (n: number) => audio('eighties', `${String(n).padStart(2, '0')}.mp3`);
 
 export const eighties: Theme = {
   id: 'eighties',
-  title: "80's",
+  title: { pt: 'Anos 80', en: 'The 80s' },
   emoji: '📼',
-  description: 'Trilhas sonoras de uma década inesquecível.',
+  description: {
+    pt: 'Trilhas sonoras de uma década inesquecível.',
+    en: 'Soundtracks from an unforgettable decade.',
+  },
   accent: '#ff9f1c',
   challenges: [
     {
@@ -33,7 +36,7 @@ export const eighties: Theme = {
       id: 5,
       audioSrc: a(5),
       answer: 'De Volta para o Futuro',
-      aliases: ['Back to the Future'],
+      answerEn: 'Back to the Future',
     },
     {
       id: 6,
@@ -46,7 +49,7 @@ export const eighties: Theme = {
       id: 8,
       audioSrc: a(8),
       answer: 'Os Caça-Fantasmas',
-      aliases: ['Ghostbusters'],
+      answerEn: 'Ghostbusters',
     },
     {
       id: 9,
@@ -58,7 +61,7 @@ export const eighties: Theme = {
       id: 10,
       audioSrc: a(10),
       answer: 'Clube dos Cinco',
-      aliases: ['The Breakfast Club'],
+      answerEn: 'The Breakfast Club',
     },
   ],
 };
