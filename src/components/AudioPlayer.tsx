@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useT } from '../i18n/useT';
 
 interface Props {
   src: string;
@@ -8,6 +9,7 @@ interface Props {
 }
 
 export function AudioPlayer({ src, isPlaying, onToggle, onStop }: Props) {
+  const { t } = useT();
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export function AudioPlayer({ src, isPlaying, onToggle, onStop }: Props) {
         type="button"
         className={`play-btn ${isPlaying ? 'is-playing' : ''}`}
         onClick={onToggle}
-        aria-label={isPlaying ? 'Parar trecho' : 'Tocar trecho'}
+        aria-label={isPlaying ? t.stop : t.play}
       >
         {isPlaying ? '■' : '▶'}
       </button>

@@ -1,8 +1,10 @@
 import { useMuted } from '../hooks/useMuted';
+import { useT } from '../i18n/useT';
 
 export function MuteButton() {
   const [muted, toggle] = useMuted();
-  const label = muted ? 'Ativar efeitos sonoros' : 'Silenciar efeitos sonoros';
+  const { t } = useT();
+  const label = muted ? t.unmuteSfx : t.muteSfx;
 
   return (
     <button

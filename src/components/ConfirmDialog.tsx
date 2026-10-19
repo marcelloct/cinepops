@@ -1,4 +1,5 @@
 import { useEffect, useRef, type MouseEvent, type SyntheticEvent } from 'react';
+import { useT } from '../i18n/useT';
 
 interface Props {
   open: boolean;
@@ -16,11 +17,12 @@ export function ConfirmDialog({
   emoji = '❓',
   title,
   message,
-  confirmLabel = 'Confirmar',
-  cancelLabel = 'Cancelar',
+  confirmLabel,
+  cancelLabel,
   onConfirm,
   onCancel,
 }: Props) {
+  const { t } = useT();
   const ref = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -62,10 +64,10 @@ export function ConfirmDialog({
             onClick={onCancel}
             autoFocus
           >
-            {cancelLabel}
+            {cancelLabel ?? t.cancel}
           </button>
           <button type="button" className="btn btn-danger" onClick={onConfirm}>
-            {confirmLabel}
+            {confirmLabel ?? t.confirm}
           </button>
         </div>
       </div>
