@@ -1,9 +1,10 @@
 import { useState, type ChangeEvent } from 'react';
 import type { Challenge } from '../types/challenge';
-import { isCorrectAnswer } from '../utils/answer';
+import { displayAnswer, isCorrectAnswer } from '../utils/answer';
 import { AudioPlayer } from './AudioPlayer';
 import { playSuccess } from '../utils/sfx';
 import { Confetti } from './Confetti';
+import { useT } from '../i18n/useT';
 
 interface Props {
   challenge: Challenge;
@@ -24,6 +25,7 @@ export function ChallengeCard({
   onStop,
   onSolve,
 }: Props) {
+  const { t, lang } = useT();
   const [value, setValue] = useState('');
   const [justSolved, setJustSolved] = useState(false);
 
@@ -56,9 +58,9 @@ export function ChallengeCard({
       <input
         type="text"
         className="card-input"
-        placeholder="Qual é o filme?"
-        aria-label={`Resposta do desafio ${index + 1}`}
-        value={isSolved ? challenge.answer : value}
+        placeholder={t.placeholder}
+        aria-label={t.answerAria(index + 1)}
+        value={isSolved ? displayAnswer(challenge, lang) : value}
         onChange={handleChange}
         readOnly={isSolved}
         autoComplete="off"
